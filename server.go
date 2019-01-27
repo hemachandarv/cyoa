@@ -17,22 +17,11 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error: %v", err)
 	}
-	engine, err := adventure.GetGameEngine(adventureData, gameTemplate)
+	gameEngine, err := adventure.GetGameEngine(adventureData, gameTemplate)
 	if err != nil {
 		log.Fatalf("Error: %v", err)
 	}
-	mux := defaultMux()
-	mux.Handle("/cyoa", engine)
-	http.ListenAndServe(":8000", mux)
-}
-
-func defaultMux() *http.ServeMux {
 	mux := http.NewServeMux()
-	http.HandleFunc("/", notFoundHandler)
-	return mux
-}
-
-func notFoundHandler(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotFound)
-	w.Write([]byte("Error! Not Found!"))
+	mux.Handle("/cyoa/", gameEngine)
+	http.ListenAndServe(":8000", mux)
 }

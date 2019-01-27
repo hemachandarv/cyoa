@@ -3,6 +3,7 @@ package adventure
 import (
 	"html/template"
 	"net/http"
+	"strings"
 )
 
 /*
@@ -33,7 +34,23 @@ func GetGameEngine(adventureData map[string]*Story, tmplFile string) (engine *Ga
 /*
 ServeHTTP will be responsible for state transitions
 in the adventure. It will serve the corresponding HTML
-to the client.
+to the client by rendering the parsed template with context data.
 */
 func (game *GameEngine) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	arc := currentArc(r.URL.Path)
+	tmplData, ok := game.adventureData[arc]
+	if ok {
+		game.tmpl.Execute(w, tmplData)
+	} else {
+		http.NotFound(w, r)
+	}
+}
+
+func currentArc(path string) (arc string) {
+	p := strings.Split(path, "/")
+	if len(p) == 0 {
+		return
+	}
+	arc = p[len(p)-1]
+	return
 }

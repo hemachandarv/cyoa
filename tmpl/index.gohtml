@@ -3,15 +3,18 @@
         <title>Choose Your Own Adventure</title>
     </head>
     <body>
-        <div id="title">
+        <div id='title'>
             {{ .Title }}
         </div>
-        <div id="story">
+        <div id='story'>
             {{ range .Content }}
                 <p>{{ . }}</p>
             {{ end }}
         </div>
-        <div id="options">
+        <div id='options'>
+            {{ range .Paths }}
+                <p><a href='{{ .Arc }}'>{{ .Description }}</a></p>
+            {{ end }}
         </div>
     </body>
 </html>
