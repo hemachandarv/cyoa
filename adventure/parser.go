@@ -31,13 +31,13 @@ returns a map where Key is the arc-name and value is the
 corresponsing Story struct that contains the
 details from input data.
 */
-func ParseJSON(filename string) (adventure map[string]Story, err error) {
+func ParseJSON(filename string) (adventureData map[string]*Story, err error) {
 	f, err := os.Open(filename)
 	defer f.Close()
 	if err != nil {
 		return
 	}
 	d := json.NewDecoder(f)
-	err = d.Decode(&adventure)
+	err = d.Decode(&adventureData)
 	return
 }

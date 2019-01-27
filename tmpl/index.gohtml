@@ -1,10 +1,17 @@
 <html>
     <head>
-        <title></title>
+        <title>Choose Your Own Adventure</title>
     </head>
     <body>
-        <div id="title"></div>
-        <div id="story"></div>
-        <div id="options"></div>
+        <div id="title">
+            {{ .Title }}
+        </div>
+        <div id="story">
+            {{ range .Content }}
+                <p>{{ . }}</p>
+            {{ end }}
+        </div>
+        <div id="options">
+        </div>
     </body>
 </html>
