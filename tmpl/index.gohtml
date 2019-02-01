@@ -1,20 +1,32 @@
-<html>
+<!doctype html>
+<html lang='en'>
     <head>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=np'>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
         <title>Choose Your Own Adventure</title>
     </head>
     <body>
-        <div id='title'>
-            {{ .Title }}
-        </div>
-        <div id='story'>
-            {{ range .Content }}
-                <p>{{ . }}</p>
-            {{ end }}
-        </div>
-        <div id='options'>
-            {{ range .Paths }}
-                <p><a href='{{ .Arc }}'>{{ .Description }}</a></p>
-            {{ end }}
+        <div class='container'>
+            <div class='row'>
+                <div id='title'>
+                    <h1>{{ .Title }}</h1>
+                </div>
+            </div>
+            <div class='row'>
+                <div id='story'>
+                    {{ range .Content }}
+                        <p>{{ . }}</p>
+                    {{ end }}
+                </div>
+            </div>
+            <div class='row'>
+                <div id='options'>
+                    {{ range .Paths }}
+                        <p><a href='{{ .Arc }}'>{{ .Description }}</a></p>
+                    {{ end }}
+                </div>
+            </div>
         </div>
     </body>
 </html>
